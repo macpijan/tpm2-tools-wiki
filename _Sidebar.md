@@ -6,3 +6,4 @@
   * [Hello World](https://github.com/tpm2-software/tpm2-tools/wiki/Getting-Started#hello-world)
 * Tutorial
   * [Creating Objects](https://github.com/tpm2-software/tpm2-tools/wiki/Creating-Objects)
+  * [Duplicating Objects](https://github.com/tpm2-software/tpm2-tools/wiki/Duplicating-Objects)
