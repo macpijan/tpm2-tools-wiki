@@ -2,6 +2,7 @@
   * [Introduction](https://github.com/tpm2-software/tpm2-tools/wiki/Getting-Started#introduction)
   * [Installing](https://github.com/tpm2-software/tpm2-tools/wiki/Getting-Started#installing)
     * [Version Dependencies](https://github.com/tpm2-software/tpm2-tools/wiki/Dependency-Matrix)
+    * [Release Lifecycle](https://github.com/tpm2-software/tpm2-tools/wiki/Release-Lifecycle)
   * [Need a TPM?](https://github.com/tpm2-software/tpm2-tools/wiki/Getting-Started#tpm-dependency)
   * [Hello World](https://github.com/tpm2-software/tpm2-tools/wiki/Getting-Started#hello-world)
 * Tutorial
