@@ -7,6 +7,7 @@ tpm2-tools has an intricate dependency on the tpm2-tss project and the tpm2-abrm
 | tpm2-tools version | tpm2-tss version | tpm2-abrmd version|
 |--------------------|------------------|-------------------|
 |[master](https://github.com/01org/tpm2-tools)|[master](https://github.com/01org/tpm2-tss)|[master](https://github.com/01org/tpm2-abrmd)|
+|[4.1](https://github.com/tpm2-software/tpm2-tools/releases/tag/4.1)|[>=2.3.1](https://github.com/tpm2-software/tpm2-tss/releases/tag/2.3.1)|[>=2.3.0](https://github.com/tpm2-software/tpm2-abrmd/releases/tag/2.3.0)
 |[4.0](https://github.com/tpm2-software/tpm2-tools/releases/tag/4.0)|[>=2.3.1](https://github.com/tpm2-software/tpm2-tss/releases/tag/2.3.1)|[>=2.2.0](https://github.com/tpm2-software/tpm2-abrmd/releases/tag/2.2.0)
 |[3.2.0](https://github.com/tpm2-software/tpm2-tools/releases/tag/3.2.0-rc0)|[2.0.0](https://github.com/tpm2-software/tpm2-tss/releases/tag/2.0.0)|[2.0.0](https://github.com/tpm2-software/tpm2-abrmd/releases/tag/2.0.0)
 |[3.1.0](https://github.com/tpm2-software/tpm2-tools/releases/tag/3.1.0)|[2.0.0](https://github.com/tpm2-software/tpm2-tss/releases/tag/2.0.0)|[2.0.0](https://github.com/tpm2-software/tpm2-abrmd/releases/tag/2.0.0)
