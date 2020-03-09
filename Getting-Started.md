@@ -117,9 +117,9 @@ abrmd is designed by default to connect to a hardware TPM, hwoever we need it to
 # Hello World
 
 With the `tpm_server` and the abrmd running, we can run a tool to get the pcr values
-of a tpm. Running the ```tpm2_pcrlist``` command should yield a result like below:
+of a tpm. Running the ```tpm2_pcrread``` command should yield a result like below:
 ```
-tpm2_pcrlist 
+tpm2_pcrread 
 sha1 :
   0  : 0000000000000000000000000000000000000003
   1  : 0000000000000000000000000000000000000000
