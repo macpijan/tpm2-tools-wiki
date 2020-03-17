@@ -26,11 +26,13 @@ Under a primary object, one can create N objects. These objects can be created t
 
 We assume you have a working installation of tss, tools, a tpm simulator and abrmd. If you don't, see: [Getting Started](https://github.com/tpm2-software/tpm2-tools/wiki/Getting-Started).
 
+The below commands were tested on the 4.1.1 release of the tpm2-tools.
+
 ## Creating a Primary Key
 
 Let's create a primary key under the owner hierarchy:
 ```sh
-tpm2_createprimary -o primary.ctx
+tpm2_createprimary -c primary.ctx
 ```
 That's all there is to it. The tool, `tpm2_createprimary` defaults to creating the object under the owner hierarchy. One might ask, "Why didn't we have to "authorize" to the owner hierarchy?" The tool itself defaults to an empty password, which is the default for the owner hierarchy when using the TPM simulator.
 
@@ -49,15 +51,15 @@ That tool outputs data to stdout in a YAML format. Study the output, even though
 Create the second child, which will be suitable for having children keys, ie a parent key. This will require us to explicitly select the object attributes to achieve this goal. Object attributes are flags that control the behavior of objects. A parent object needs to have the restricted attribute set. Restricted keys are limited to what and how they can be used in operations.
 
 ```sh
-tpm2_create -C primary.ctx -Grsa2048:null:aes -u key2.pub -r key2.priv -A "restricted|decrypt|fixedtpm|fixedparent|sensitivedataorigin|userwithauth"
+tpm2_create -C primary.ctx -Grsa2048 -u key2.pub -r key2.priv -a "restricted|decrypt|fixedtpm|fixedparent|sensitivedataorigin|userwithauth"
 ```
 
 ### Step 3 - Load a key
 In order to create a child under the key created in step 2, we need to load that key; an object cannot be used without being loaded in the TPM. We will use the load command to achieve this, like so:
 ```sh
-tpm2_load -C primary.ctx -u key2.pub -r key2.priv -o key2.ctx
+tpm2_load -C primary.ctx -u key2.pub -r key2.priv -c key2.ctx
 ```
-Notice the output, a handle. If you were writing an application that didn't exit or using the TPM without a resource manager, that handle would be valid for use subsequently. However, we're using a resource manager (RM), and the RM flushes transient objects when the tool exits and tpm2_load loads objects into non-persistent transient memory. The tools support using context blobs where possible to overcome this condition. In this case, the tpm2_load command takes a -o option to output the saved result of a load to disk. We can use that later.
+Notice the output, a handle. If you were writing an application that didn't exit or using the TPM without a resource manager, that handle would be valid for use subsequently. However, we're using a resource manager (RM), and the RM flushes transient objects when the tool exits and tpm2_load loads objects into non-persistent transient memory. The tools support using context blobs where possible to overcome this condition. In this case, the tpm2_load command takes a -c option to output the saved result of a load to disk. We can use that later.
 
 ### Step 4 - Create a leaf key under a parent key
 Now that we have the parent key loaded in Step 3, we can create the last key. For this key, well make an AES key.
@@ -69,14 +71,14 @@ You don't have to create keys, you can create free-form objects for "sealing" sm
 For instance, I'll seal a string from stdin to the TPM:
 
 ```sh
-echo "my sealed data" | tpm2_create -C key2.ctx -I- -u key4.pub -r key4.priv
+echo "my sealed data" | tpm2_create -C key2.ctx -i- -u key4.pub -r key4.priv
 ```
 This data can be recovered with tpm2_unseal.
 ```sh
-tpm2_load -C key2.ctx -u key4.pub -r key4.priv -o key4.ctx
+tpm2_load -C key2.ctx -u key4.pub -r key4.priv -c key4.ctx
 tpm2_unseal -c key4.ctx
 my sealed data
 ```
 # Conclusion
 
-This tutorial shows you how to create various objects, load objects into the TPM, and as a bonus how to seal and unseal data. To keep things simple, authorization values where omitted. In real cases, you want to use passwords at a minimum. Note that password based authorizations are sent to the TPM in the clear, thus anyone able to snoop on this data will have authorization to the object. Other, more complex authorization schemes will be covered in subsequent tutorials. 
+This tutorial shows you how to create various objects, load objects into the TPM, and as a bonus how to seal and unseal data. To keep things simple, authorization values were omitted. In real cases, you want to use passwords at a minimum. Note that password based authorizations are sent to the TPM in the clear, thus anyone able to snoop on this data will have authorization to the object. Other, more complex authorization schemes will be covered in subsequent tutorials.
