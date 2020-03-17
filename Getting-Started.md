@@ -24,6 +24,24 @@ The tools are clients, that perform those three steps.
 
 # Installing
 
+## Installing from package repository
+
+There is a great chance that your repository already contains recent prebuilt
+tpm2-tools package. At the time of writing (17 March 2020), the Ubuntu 20.04
+provided the latest release (4.1.1).
+
+If this is the case, you can simply install packages using your package
+manager. In case of Debian/Ubuntu:
+
+```
+sudo apt install libtss2-tcti-tabrmd0 tpm2-abrmd tpm2-tools
+```
+
+## Building from source
+
+Follow below steps if you need to install the latest tools, which are not
+yet available in your distribution, or just prefer to compile them on your own.
+
 Start off by satisfying all dependencies. Depending on what
 version of the tpm2-tools is being used, you may need different
 versions. Please consult the [dependency matrix](https://github.com/tpm2-software/tpm2-tools/wiki/Dependency-Matrix).
@@ -85,11 +103,12 @@ or wear out NV ram with too many write cycles. We reccomend using the simulator,
 hello world will expect it and abrmd to be in place.
 
 ### Installing the TPM2.0 Simulator:
+
 ```
-wget https://downloads.sourceforge.net/project/ibmswtpm2/ibmtpm974.tar.gz
-mkdir ibmtpm974
-cd ibmtpm974
-tar -xavf ../ibmtpm974.tar.gz
+wget https://downloads.sourceforge.net/project/ibmswtpm2/ibmtpm1563.tar.gz
+mkdir ibmtpm1563
+cd ibmtpm1563
+tar -xavf ../ibmtpm1563.tar.gz
 cd src
 make
 ```
@@ -110,9 +129,9 @@ caveats with RMs, but we won't discuss those here, and instead focus on the basi
 
 With that said, lets start the RM:
 ```
-tpm2-abrmd --allow-root --tcti=mssim
+sudo tpm2-abrmd --allow-root --tcti=mssim
 ```
-abrmd is designed by default to connect to a hardware TPM, hwoever we need it to connect to the `tpm_server` that was started previously, so pass the `--tcti=mssim` option to tell it to do so.
+abrmd is designed by default to connect to a hardware TPM, however we need it to connect to the `tpm_server` that was started previously, so pass the `--tcti=mssim` option to tell it to do so.
 
 # Hello World
 
